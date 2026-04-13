@@ -1,0 +1,1309 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>泡泡玛特 9992.HK — 深度研究报告</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<style>
+:root {
+  --navy:#003057;--navy-mid:#00477a;--navy-lt:#1a5c8f;
+  --blue:#0074bf;--sky:#e8f3fc;--sky-dk:#cde4f5;
+  --white:#ffffff;--off:#f7f8fa;--border:#d6dde6;--border-lt:#e8edf3;
+  --text:#1a2332;--text2:#3d5168;--text3:#637589;--text4:#8fa3b8;
+  --green:#00783e;--green-lt:#e8f5ef;
+  --red:#c0392b;--red-lt:#fdf1f0;
+  --amber:#b45309;--amber-lt:#fef3e2;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--off);color:var(--text);font-family:'Source Sans 3',sans-serif;font-size:13px;line-height:1.55;-webkit-font-smoothing:antialiased}
+.topbar{background:var(--navy);height:4px}
+
+/* Header */
+.hdr{background:var(--white);border-bottom:1px solid var(--border);padding:28px 40px 22px}
+.hdr-inner{display:flex;justify-content:space-between;align-items:flex-start}
+.hdr-firm{font-size:10px;font-weight:600;color:var(--text4);letter-spacing:.12em;text-transform:uppercase;margin-bottom:10px}
+.hdr-ticker{font-family:'Source Code Pro',monospace;font-size:11px;color:var(--blue);font-weight:500;letter-spacing:.04em;margin-bottom:4px}
+.hdr-name{font-family:'Source Serif 4',serif;font-size:24px;font-weight:600;color:var(--navy);letter-spacing:-.01em;line-height:1.15;margin-bottom:10px}
+.hdr-badges{display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:2px;font-size:10px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-family:'Source Code Pro',monospace}
+.b-watch{background:var(--amber-lt);color:var(--amber);border:1px solid #e8c17a}
+.b-rating{background:var(--sky);color:var(--navy-mid);border:1px solid var(--sky-dk)}
+.b-bucket{background:var(--navy);color:#fff}
+.hdr-right{text-align:right;min-width:200px}
+.hdr-pl{font-size:10px;color:var(--text4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:3px}
+.hdr-price{font-family:'Source Code Pro',monospace;font-size:30px;font-weight:500;color:var(--navy);letter-spacing:-.02em;line-height:1}
+.hdr-psub{font-size:11px;color:var(--text3);margin-top:4px;font-family:'Source Code Pro',monospace}
+.hdr-target{margin-top:8px;font-size:11px;color:var(--text2)}
+.hdr-target strong{color:var(--navy-mid);font-weight:600}
+
+/* KPI */
+.kpi-strip{display:grid;grid-template-columns:repeat(6,1fr);background:var(--white);border-bottom:2px solid var(--navy)}
+.kpi-item{padding:16px 20px;border-right:1px solid var(--border)}
+.kpi-item:last-child{border-right:none}
+.kpi-item.khi{background:var(--sky)}
+.kpi-label{font-size:9px;font-weight:600;color:var(--text4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:5px}
+.kpi-val{font-family:'Source Code Pro',monospace;font-size:19px;font-weight:500;color:var(--navy);line-height:1.1}
+.kpi-sub{font-size:10px;color:var(--text3);margin-top:3px}
+.vpos{color:var(--green)!important}.vneg{color:var(--red)!important}
+.vnavy{color:var(--navy)!important}.vblue{color:var(--blue)!important}.vamb{color:var(--amber)!important}
+
+/* Tabs */
+.tabs-wrap{background:var(--white);border-bottom:1px solid var(--border);padding:0 40px;position:sticky;top:0;z-index:100;box-shadow:0 1px 4px rgba(0,0,0,.06)}
+.tabs-nav{display:flex;overflow-x:auto}
+.tab-btn{padding:13px 20px 12px;font-size:12px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;transition:all .15s;letter-spacing:.02em}
+.tab-btn:hover{color:var(--navy-mid)}
+.tab-btn.active{color:var(--navy);border-bottom-color:var(--blue)}
+.tab-content{display:none;padding:32px 40px 48px}
+.tab-content.active{display:block}
+
+/* Layout */
+.section{margin-bottom:36px}
+.sec-hdr{display:flex;align-items:baseline;gap:12px;margin-bottom:14px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.sec-title{font-family:'Source Serif 4',serif;font-size:14px;font-weight:600;color:var(--navy)}
+.sec-note{font-size:11px;color:var(--text4)}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:20px}
+.g4{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.g65{display:grid;grid-template-columns:1.6fr 1fr;gap:24px}
+
+/* Card */
+.card{background:var(--white);border:1px solid var(--border);border-top:3px solid var(--navy)}
+.card-blue{border-top-color:var(--blue)}
+.card-green{border-top-color:var(--green)}
+.card-amber{border-top-color:var(--amber)}
+.card-body{padding:18px 20px}
+.card-label{font-size:9px;font-weight:600;color:var(--text4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:8px}
+.card-number{font-family:'Source Code Pro',monospace;font-size:26px;font-weight:500;color:var(--navy);line-height:1}
+.card-sub{font-size:11px;color:var(--text3);margin-top:5px}
+
+/* Tables */
+.tbl{background:var(--white);border:1px solid var(--border);overflow-x:auto}
+.dt{width:100%;border-collapse:collapse;font-size:12px}
+.dt thead th{background:var(--navy);color:rgba(255,255,255,.85);font-size:9px;font-weight:600;text-transform:uppercase;letter-spacing:.08em;padding:9px 14px;text-align:right;white-space:nowrap;border-right:1px solid rgba(255,255,255,.1)}
+.dt thead th:first-child{text-align:left}
+.dt thead th:last-child{border-right:none}
+.dt tbody td{padding:8px 14px;text-align:right;border-bottom:1px solid var(--border-lt);border-right:1px solid var(--border-lt);font-family:'Source Code Pro',monospace;font-size:11px;color:var(--text2)}
+.dt tbody td:first-child{text-align:left;font-family:'Source Sans 3',sans-serif;font-size:12px;color:var(--text);border-right:1px solid var(--border);background:var(--off);font-weight:500}
+.dt tbody td:last-child{border-right:none}
+.dt tbody tr:last-child td{border-bottom:none}
+.dt tbody tr:hover td{background:var(--sky)!important;background-color:var(--sky)!important}
+.tr-hl td{background:var(--sky)!important}
+.tr-hl td:first-child{background:#dbeef8!important}
+.tr-tot td{background:var(--navy)!important;color:rgba(255,255,255,.9)!important;font-weight:600!important;border-color:var(--navy-mid)!important}
+.tr-tot td:first-child{background:var(--navy)!important;color:#fff!important;font-family:'Source Code Pro',monospace!important;font-size:11px!important}
+.tdp{color:var(--green)!important;font-weight:600!important}
+.tdn{color:var(--red)!important;font-weight:600!important}
+.tdv{color:var(--navy-mid)!important;font-weight:600!important}
+.tda{color:var(--amber)!important;font-weight:600!important}
+.tdm{color:var(--text4)!important;font-weight:400!important}
+
+/* Scenarios */
+.sc-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--border)}
+.sc-card{background:var(--white)}
+.sc-hdr{padding:12px 18px;display:flex;justify-content:space-between;align-items:center}
+.sc-hdr.bull{background:var(--green)}.sc-hdr.base{background:var(--navy)}.sc-hdr.bear{background:var(--red)}
+.sc-label{font-size:11px;font-weight:700;color:#fff;letter-spacing:.04em;text-transform:uppercase}
+.sc-price{font-family:'Source Code Pro',monospace;font-size:17px;font-weight:500;color:#fff}
+.sc-body{padding:14px 18px}
+.sc-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;border-bottom:1px solid var(--border-lt);font-size:11px}
+.sc-row:last-child{border-bottom:none}
+.sc-row .lbl{color:var(--text3)}.sc-row .val{font-family:'Source Code Pro',monospace;font-weight:500;color:var(--text)}
+
+/* Boxes */
+.insight{background:var(--sky);border-left:3px solid var(--blue);padding:12px 16px;font-size:12px;color:var(--text2);line-height:1.7;margin:14px 0}
+.insight strong{color:var(--navy)}
+.warn-box{background:var(--amber-lt);border-left:3px solid var(--amber);padding:12px 16px;font-size:12px;color:var(--text2);line-height:1.7;margin:14px 0}
+.warn-box strong{color:var(--amber)}
+
+/* Charts */
+.ch-card{background:var(--white);border:1px solid var(--border);padding:20px}
+.ch{position:relative;height:240px}
+.ch-sm{position:relative;height:190px}
+.ch-lg{position:relative;height:290px}
+
+/* UE table */
+.ue-table{width:100%;border-collapse:collapse}
+.ue-table tr td{padding:8px 16px;border-bottom:1px solid var(--border-lt);font-size:12px}
+.ue-table tr td:first-child{color:var(--text2);width:55%;padding-left:20px}
+.ue-table tr td:not(:first-child){text-align:right;font-family:'Source Code Pro',monospace;font-size:11px}
+.ue-table .ue-sec td{background:var(--navy);color:rgba(255,255,255,.7);font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;padding:5px 16px;border:none}
+.ue-table .ue-tot td{background:var(--sky);font-weight:700;color:var(--navy);font-size:13px;border-top:2px solid var(--navy);border-bottom:2px solid var(--navy)}
+.ue-table .ue-tot td:not(:first-child){font-family:'Source Code Pro',monospace;font-size:14px}
+.ue-table tr:last-child td{border-bottom:none}
+
+/* Prog bars */
+.prog-row{display:flex;align-items:center;gap:12px;margin-bottom:10px}
+.prog-label{font-size:11px;color:var(--text2);width:170px;flex-shrink:0}
+.prog-track{flex:1;height:6px;background:var(--border);border-radius:0;overflow:hidden}
+.prog-fill{height:100%}
+.prog-val{font-family:'Source Code Pro',monospace;font-size:11px;font-weight:600;width:60px;text-align:right;color:var(--navy)}
+
+/* Tags */
+.stag{display:inline-block;padding:1px 6px;font-size:9px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;border-radius:2px;font-family:'Source Code Pro',monospace}
+.sg{background:var(--green-lt);color:var(--green);border:1px solid #a7d4bc}
+.sb{background:var(--sky);color:var(--blue);border:1px solid var(--sky-dk)}
+.sa{background:var(--amber-lt);color:var(--amber);border:1px solid #e8c17a}
+.sgr{background:var(--off);color:var(--text4);border:1px solid var(--border)}
+
+/* Divider */
+.div-row{display:flex;align-items:center;gap:10px;margin:20px 0 14px}
+.div-row span{font-size:10px;font-weight:700;color:var(--text4);text-transform:uppercase;letter-spacing:.1em;white-space:nowrap}
+.div-row::after{content:'';flex:1;height:1px;background:var(--border)}
+
+/* Footer */
+.page-footer{background:var(--navy);padding:16px 40px;font-size:10px;color:rgba(255,255,255,.5);line-height:1.8}
+.footnote{font-size:10px;color:var(--text4);margin-top:10px;line-height:1.7;padding:8px 0;border-top:1px solid var(--border-lt)}
+</style>
+</head>
+<body>
+<div class="topbar"></div>
+
+<!-- HEADER -->
+<div class="hdr">
+  <div class="hdr-inner">
+    <div>
+      <div class="hdr-firm">Equity Research · 个人研究报告</div>
+      <div class="hdr-ticker">9992.HK · 港交所主板 · 消费娱乐</div>
+      <div class="hdr-name">泡泡玛特国际集团有限公司</div>
+      <div class="hdr-badges">
+        <span class="badge b-watch">观望偏买入</span>
+        <span class="badge b-bucket">M1 核心-增长</span>
+        <span class="badge b-rating">建仓区 HKD 130–155</span>
+        <span style="font-size:11px;color:var(--text4);margin-left:4px">数据截至 2026.04.13</span>
+      </div>
+    </div>
+    <div class="hdr-right">
+      <div class="hdr-pl">当前股价</div>
+      <div class="hdr-price">150.00 <span style="font-size:14px;color:var(--text3)">HKD</span></div>
+      <div class="hdr-psub">52W: 118.80 – 339.80</div>
+      <div class="hdr-target" style="margin-top:10px">目标价（基准）&nbsp;<strong>HKD 210</strong></div>
+      <div class="hdr-target">市值&nbsp;<strong>~HKD 2,000亿</strong></div>
+    </div>
+  </div>
+</div>
+
+<!-- KPI STRIP -->
+<div class="kpi-strip">
+  <div class="kpi-item khi">
+    <div class="kpi-label">2025A 营收</div>
+    <div class="kpi-val">371.2<span style="font-size:12px;font-weight:400;color:var(--text3)"> 亿</span></div>
+    <div class="kpi-sub vpos">+184.7% YoY</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">经调整净利润</div>
+    <div class="kpi-val">130.8<span style="font-size:12px;font-weight:400;color:var(--text3)"> 亿</span></div>
+    <div class="kpi-sub vpos">+284.5% YoY</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">毛利率</div>
+    <div class="kpi-val">72.1<span style="font-size:12px;font-weight:400;color:var(--text3)">%</span></div>
+    <div class="kpi-sub vpos">历史新高 +5.3pp</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">TTM PE</div>
+    <div class="kpi-val">~14<span style="font-size:12px;font-weight:400;color:var(--text3)">x</span></div>
+    <div class="kpi-sub vamb">隐含增速 12–14%</div>
+  </div>
+  <div class="kpi-item khi">
+    <div class="kpi-label">DCF合理价（20%稳态）</div>
+    <div class="kpi-val">~210<span style="font-size:12px;font-weight:400;color:var(--text3)"> HKD</span></div>
+    <div class="kpi-sub">WACC 12.5% · TV g 4%</div>
+  </div>
+  <div class="kpi-item">
+    <div class="kpi-label">LTV / CAC</div>
+    <div class="kpi-val">5–7<span style="font-size:12px;font-weight:400;color:var(--text3)">x</span></div>
+    <div class="kpi-sub">CAC ~130元 · 回收&lt;1年</div>
+  </div>
+</div>
+
+<!-- TABS -->
+<div class="tabs-wrap">
+  <div class="tabs-nav">
+    <button class="tab-btn active" onclick="sw('overview',this)">整体概览</button>
+    <button class="tab-btn" onclick="sw('domestic',this)">国内业务</button>
+    <button class="tab-btn" onclick="sw('overseas',this)">海外业务</button>
+    <button class="tab-btn" onclick="sw('ue',this)">单点 UE 模型</button>
+    <button class="tab-btn" onclick="sw('ip',this)">IP 矩阵分析</button>
+  </div>
+</div>
+
+<!-- ═══════ TAB 1: OVERVIEW ═══════ -->
+<div id="tab-overview" class="tab-content active">
+  <div class="g65" style="margin-bottom:28px">
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">营收与盈利趋势</span><span class="sec-note">人民币亿元 · 2021–2025A</span></div>
+      <div class="ch-card"><div class="ch-lg"><canvas id="c1"></canvas></div></div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">核心财务指标</span></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>指标</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th></tr></thead>
+        <tbody>
+          <tr><td>营收（亿）</td><td>46.2</td><td>63.0</td><td>130.4</td><td class="tdv">371.2</td></tr>
+          <tr><td>YoY</td><td class="tdn">+3%</td><td class="tdp">+37%</td><td class="tdp">+107%</td><td class="tdp">+185%</td></tr>
+          <tr class="tr-hl"><td>归母净利润（亿）</td><td>4.8</td><td>10.8</td><td>31.3</td><td class="tdv">127.8</td></tr>
+          <tr><td>净利润YoY</td><td class="tdn">-44%</td><td class="tdp">+127%</td><td class="tdp">+189%</td><td class="tdp">+309%</td></tr>
+          <tr><td>毛利率</td><td>57.5%</td><td>61.3%</td><td>66.8%</td><td class="tdp">72.1%</td></tr>
+          <tr><td>净利率</td><td>10.4%</td><td>18.9%</td><td>26.1%</td><td class="tdp">34.4%</td></tr>
+          <tr class="tr-hl"><td>ROE</td><td>—</td><td>14.7%</td><td>33.5%</td><td class="tdp">~75%</td></tr>
+          <tr><td>海外占比</td><td>11.5%</td><td>16.9%</td><td>38.9%</td><td class="tdv">43.8%</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-title">2026E 三情景展望</span><span class="sec-note">概率权重：Bull 25% / Base 50% / Bear 25%</span></div>
+    <div class="sc-grid">
+      <div class="sc-card">
+        <div class="sc-hdr bull"><span class="sc-label">Bull Case</span><span class="sc-price">HKD 280+</span></div>
+        <div class="sc-body">
+          <div class="sc-row"><span class="lbl">营收增速</span><span class="val tdp">≥30%</span></div>
+          <div class="sc-row"><span class="lbl">净利润</span><span class="val tdp">~160亿</span></div>
+          <div class="sc-row"><span class="lbl">新IP接力</span><span class="val tdp">星星人超50亿</span></div>
+          <div class="sc-row"><span class="lbl">关税影响</span><span class="val">越南工厂消化</span></div>
+          <div class="sc-row"><span class="lbl">含息总回报</span><span class="val tdp">+85%</span></div>
+        </div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-hdr base"><span class="sc-label">Base Case ★</span><span class="sc-price">HKD 210</span></div>
+        <div class="sc-body">
+          <div class="sc-row"><span class="lbl">营收增速</span><span class="val">~20%</span></div>
+          <div class="sc-row"><span class="lbl">净利润</span><span class="val">~150亿</span></div>
+          <div class="sc-row"><span class="lbl">新IP接力</span><span class="val">温和，无爆款</span></div>
+          <div class="sc-row"><span class="lbl">关税影响</span><span class="val tda">-5–8亿利润</span></div>
+          <div class="sc-row"><span class="lbl">含息总回报</span><span class="val tdp">+40%</span></div>
+        </div>
+      </div>
+      <div class="sc-card">
+        <div class="sc-hdr bear"><span class="sc-label">Bear Case</span><span class="sc-price">HKD 100–120</span></div>
+        <div class="sc-body">
+          <div class="sc-row"><span class="lbl">营收增速</span><span class="val tdn">&lt;15%</span></div>
+          <div class="sc-row"><span class="lbl">净利润</span><span class="val tdn">&lt;130亿</span></div>
+          <div class="sc-row"><span class="lbl">新IP接力</span><span class="val tdn">Labubu降温</span></div>
+          <div class="sc-row"><span class="lbl">关税影响</span><span class="val tdn">北美收入-30%</span></div>
+          <div class="sc-row"><span class="lbl">含息总回报</span><span class="val tdn">-25%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">建仓执行策略</span><span class="sec-note">总仓位上限 5% · M1框架</span></div>
+      <div class="tbl" style="margin-bottom:12px"><table class="dt">
+        <thead><tr><th>批次</th><th>触发价 HKD</th><th>仓位</th><th>逻辑</th></tr></thead>
+        <tbody>
+          <tr class="tr-hl"><td>T1（当前）</td><td class="tdv">150–155</td><td class="tdv">1.5%</td><td>建立观察仓</td></tr>
+          <tr><td>T2</td><td>135</td><td>1.5%</td><td>宏观/关税回调</td></tr>
+          <tr><td>T3</td><td>118–120</td><td>1.5%</td><td>52W低点支撑</td></tr>
+          <tr><td>T4（催化剂）</td><td>数据触发</td><td>0.5%</td><td>Q1超预期验证</td></tr>
+          <tr class="tr-tot"><td>合计上限</td><td>—</td><td>5.0%</td><td>M1框架上限</td></tr>
+        </tbody>
+      </table></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>类型</th><th>价位 HKD</th><th>说明</th></tr></thead>
+        <tbody>
+          <tr><td>硬止损</td><td class="tdn">100</td><td>跌破2024低点</td></tr>
+          <tr><td>减仓止盈1</td><td class="tdp">200</td><td>+33%，减T1的50%</td></tr>
+          <tr class="tr-hl"><td>减仓止盈2</td><td class="tdp">250</td><td>目标价上沿，减至1%</td></tr>
+          <tr><td>基本面止损</td><td class="tdn">Q1&lt;15%</td><td>增速跌破指引下沿</td></tr>
+        </tbody>
+      </table></div>
+      <div class="insight" style="margin-top:12px">当前价格隐含FCF增速仅 <strong>12–14%</strong>，比管理层指引（≥20%）还悲观。<strong>风险收益比约2:1</strong>：Bull +73% vs Bear -33%。</div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">FCF估值模型（20%稳态）</span><span class="sec-note">WACC 12.5% · TV g 4%</span></div>
+      <div class="tbl" style="margin-bottom:12px"><table class="dt">
+        <thead><tr><th>年份</th><th>净利润（亿）</th><th>FCF（亿）</th><th>PV of FCF</th></tr></thead>
+        <tbody>
+          <tr><td>2025A 基数</td><td>127.8</td><td class="tdv">104</td><td class="tdm">—</td></tr>
+          <tr><td>2026E</td><td>153</td><td>124</td><td>110</td></tr>
+          <tr><td>2027E</td><td>184</td><td>149</td><td>118</td></tr>
+          <tr><td>2028E</td><td>221</td><td>179</td><td>126</td></tr>
+          <tr><td>2029E</td><td>265</td><td>215</td><td>134</td></tr>
+          <tr><td>2030E</td><td>318</td><td>258</td><td>143</td></tr>
+          <tr class="tr-hl"><td>PV合计 + PV of TV</td><td>—</td><td>—</td><td class="tdv">2,388亿</td></tr>
+          <tr class="tr-tot"><td>每股合理价值</td><td>WACC 12.5%</td><td>FCF转化率~81%</td><td>HKD ~210</td></tr>
+        </tbody>
+      </table></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>WACC ↓ / TV g →</th><th>3%</th><th>4%（基准）</th><th>5%</th></tr></thead>
+        <tbody>
+          <tr><td>10.5%</td><td class="tdp">270</td><td class="tdp">320</td><td class="tdp">400</td></tr>
+          <tr class="tr-hl"><td>12.5%</td><td>180</td><td class="tdv">210</td><td class="tdp">260</td></tr>
+          <tr><td>14.5%</td><td class="tdn">140</td><td>160</td><td>185</td></tr>
+        </tbody>
+      </table></div>
+      <div class="warn-box" style="margin-top:12px"><strong>注意：</strong>终值占EV约74%。对情绪消费品使用DCF，前提是相信"泡泡玛特10年后仍是健康IP平台"——这是信念判断，不是数学。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ TAB 2: DOMESTIC ═══════ -->
+<div id="tab-domestic" class="tab-content">
+  <div class="g2" style="margin-bottom:28px">
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">国内 vs 海外收入结构</span></div>
+      <div class="ch-card"><div class="ch-lg"><canvas id="c2"></canvas></div></div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">国内核心运营指标</span></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>指标</th><th>2021A</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th></tr></thead>
+        <tbody>
+          <tr><td>内地收入（亿）</td><td>43.5</td><td>41.7</td><td>52.4</td><td>79.7</td><td class="tdv">208.5</td></tr>
+          <tr><td>YoY</td><td class="tdm">—</td><td class="tdn">-4%</td><td class="tdp">+26%</td><td class="tdp">+52%</td><td class="tdp">+135%</td></tr>
+          <tr class="tr-hl"><td>内地占总收入</td><td>97%</td><td>89%</td><td>83%</td><td>61%</td><td>56%</td></tr>
+          <tr><td>运营利润率</td><td>—</td><td>—</td><td>—</td><td class="tdp">33.1%</td><td>—</td></tr>
+          <tr><td>门店数（期末）</td><td>288</td><td>329</td><td>363</td><td>401</td><td class="tdv">445</td></tr>
+          <tr><td>机器人商店</td><td>1,861</td><td>2,067</td><td>2,190</td><td>2,300</td><td class="tdv">2,452</td></tr>
+          <tr class="tr-hl"><td>单店年收入（万）</td><td>~580</td><td>~510</td><td>~680</td><td class="tdp">955</td><td class="tdp">~2,200*</td></tr>
+        </tbody>
+      </table></div>
+      <div class="footnote">*2025A含线上摊分；纯线下约1,200–1,500万</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-title">国内渠道拆分（2024A）</span></div>
+    <div class="g2">
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>渠道</th><th>2023A（亿）</th><th>2024A（亿）</th><th>YoY</th><th>占内地%</th></tr></thead>
+        <tbody>
+          <tr><td>线下零售店</td><td>24.8</td><td>38.3</td><td class="tdp">+43.9%</td><td>48%</td></tr>
+          <tr><td>机器人商店</td><td>5.5</td><td>7.0</td><td class="tdp">+26.4%</td><td>9%</td></tr>
+          <tr class="tr-hl"><td>抽盒机（私域）</td><td>7.3</td><td>11.1</td><td class="tdp">+52.7%</td><td>14%</td></tr>
+          <tr><td>天猫旗舰店</td><td>3.2</td><td>6.3</td><td class="tdp">+95.0%</td><td>8%</td></tr>
+          <tr><td>抖音直播</td><td>2.8</td><td>6.0</td><td class="tdp">+112.2%</td><td>8%</td></tr>
+          <tr><td>批发及其他</td><td>9.0</td><td>10.9</td><td class="tdp">+21%</td><td>13%</td></tr>
+          <tr class="tr-tot"><td>内地合计</td><td>52.4</td><td>79.7</td><td class="tdp">+52.3%</td><td>100%</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ch-card"><div class="ch-sm"><canvas id="c3"></canvas></div></div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-title">会员运营指标</span><span class="sec-note">仅中国内地口径</span></div>
+    <div class="tbl"><table class="dt">
+      <thead><tr><th>指标</th><th>2021A</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th><th>类型</th></tr></thead>
+      <tbody>
+        <tr><td>累计注册会员（万）</td><td>1,958</td><td>2,600</td><td>3,435</td><td>4,608</td><td class="tdv">7,258</td><td><span class="stag sg">披露</span></td></tr>
+        <tr><td>当年新增（万）</td><td>1,218</td><td class="tdn">642</td><td>835</td><td>1,173</td><td class="tdp">2,650</td><td><span class="stag sg">披露</span></td></tr>
+        <tr class="tr-hl"><td>会员复购率</td><td class="tdp">56.5%</td><td>50.7%</td><td>50.0%</td><td>49.4%</td><td class="tdp">55.7%</td><td><span class="stag sg">披露</span></td></tr>
+        <tr><td>会员贡献销售占比</td><td>92.2%</td><td>93.1%</td><td>92.1%</td><td>92.7%</td><td>93.7%</td><td><span class="stag sg">披露</span></td></tr>
+        <tr><td>累计会员ARPU（元）</td><td>~205</td><td>~149</td><td>~140</td><td>~160</td><td class="tdp">~269</td><td><span class="stag sb">直接计算</span></td></tr>
+        <tr class="tr-hl"><td>活跃会员ARPU（元）</td><td>~360</td><td>~295</td><td>~280</td><td>~325</td><td class="tdp">~490</td><td><span class="stag sa">估算</span></td></tr>
+        <tr><td>Year 1 新客ARPU（元）</td><td>—</td><td>—</td><td>—</td><td>—</td><td class="tda">~187</td><td><span class="stag sa">估算</span></td></tr>
+        <tr><td>6年期 LTV（元）</td><td>—</td><td>—</td><td>—</td><td>—</td><td>~800</td><td><span class="stag sa">估算</span></td></tr>
+      </tbody>
+    </table></div>
+    <div class="insight" style="margin-top:12px"><strong>ARPU分层：</strong>新客（Year 1）约187元，老客（Year 5+）约500元，差距2.6倍。2025年新增2,650万会员大量为Labubu首次购买者，其2026年留存率（目标≥50%）是整体ARPU走势的核心变量。</div>
+  </div>
+</div>
+
+<!-- ═══════ TAB 3: OVERSEAS ═══════ -->
+<div id="tab-overseas" class="tab-content">
+  <div class="g2" style="margin-bottom:28px">
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">海外收入爆发趋势</span></div>
+      <div class="ch-card"><div class="ch-lg"><canvas id="c4"></canvas></div></div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">海外核心指标</span></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>指标</th><th>2021A</th><th>2022A</th><th>2023A</th><th>2024A</th><th>2025A</th></tr></thead>
+        <tbody>
+          <tr><td>海外收入（亿）</td><td>1.4</td><td>5.3</td><td>10.7</td><td>50.7</td><td class="tdv">162.7</td></tr>
+          <tr><td>YoY</td><td class="tdm">—</td><td class="tdp">+279%</td><td class="tdp">+102%</td><td class="tdp">+375%</td><td class="tdp">+221%</td></tr>
+          <tr class="tr-hl"><td>占总收入</td><td>3.1%</td><td>11.5%</td><td>16.9%</td><td>38.9%</td><td class="tdv">43.8%</td></tr>
+          <tr><td>海外毛利率</td><td>37.2%</td><td>—</td><td>—</td><td class="tdp">71.3%</td><td class="tdp">~73%</td></tr>
+          <tr><td>海外运营利润率</td><td>—</td><td>—</td><td>—</td><td class="tdp">35.8%</td><td>—</td></tr>
+          <tr><td>海外门店数</td><td>7</td><td>43</td><td>80</td><td>130</td><td class="tdv">185</td></tr>
+          <tr class="tr-hl"><td>单店年收入（万）</td><td>~46</td><td>~120</td><td>~730</td><td class="tdp">2,260</td><td class="tdp">~5,000*</td></tr>
+          <tr><td>海外/国内倍数</td><td>0.08x</td><td>0.24x</td><td>1.07x</td><td class="tdp">2.37x</td><td>~2.3x</td></tr>
+        </tbody>
+      </table></div>
+      <div class="footnote">*2025A含线上（美洲线上占64%）；纯门店口径约3,000–4,000万</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-title">2025A 四大区域拆分</span></div>
+    <div class="g65">
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>区域</th><th>2024A（亿）</th><th>2025A（亿）</th><th>YoY</th><th>门店数</th><th>关税风险</th></tr></thead>
+        <tbody>
+          <tr><td>亚太（中国外）</td><td>~38</td><td class="tdv">80.1</td><td class="tdp">+158%</td><td>85家</td><td class="tdm">低</td></tr>
+          <tr class="tr-hl"><td>美洲</td><td>~8.0</td><td class="tdv">68.1</td><td class="tdp">+748%</td><td>64家</td><td class="tdn">高 ⚠️</td></tr>
+          <tr><td>欧洲及其他</td><td>~5.5</td><td>14.5</td><td class="tdp">+506%</td><td>36家</td><td class="tdm">低</td></tr>
+          <tr class="tr-tot"><td>海外合计</td><td>50.7</td><td>162.7</td><td class="tdp">+221%</td><td>185家</td><td>—</td></tr>
+        </tbody>
+      </table></div>
+      <div class="ch-card"><div class="ch-sm"><canvas id="c5"></canvas></div></div>
+    </div>
+    <div class="warn-box" style="margin-top:14px"><strong>美洲关税风险：</strong>美洲2025年68亿，占海外42%，线上占64%。若美国关税全面落地，北美收入面临30%+下行风险，冲击利润约15–20亿。越南工厂已建，转移周期约18–24个月。</div>
+  </div>
+
+  <div class="section">
+    <div class="sec-hdr"><span class="sec-title">国内 vs 海外门店效率对比（2024A）</span></div>
+    <div class="tbl"><table class="dt">
+      <thead><tr><th>指标</th><th>国内</th><th>海外</th><th>差异</th><th>差异根因</th></tr></thead>
+      <tbody>
+        <tr><td>单店年收入</td><td>955万</td><td class="tdp">2,260万</td><td class="tdv">2.4x</td><td>海外定价高2–3倍+旗舰店更大</td></tr>
+        <tr class="tr-hl"><td>毛利率</td><td>63.9%</td><td class="tdp">71.3%</td><td>+7.4pp</td><td>售价高，COGS相近</td></tr>
+        <tr><td>租金费率</td><td>~9%</td><td>~9%</td><td>持平</td><td>收入更高抵消绝对租金差</td></tr>
+        <tr><td>门店EBITDA率</td><td>~39%</td><td class="tdp">~41%</td><td>+2pp</td><td>毛利率差异传导</td></tr>
+        <tr><td>开店总投资</td><td>~130万</td><td>~300万</td><td>2.3x</td><td>旗舰店装修+保证金</td></tr>
+        <tr class="tr-hl"><td>投资回收期</td><td>4–5月</td><td class="tdp">~4月</td><td>海外更快</td><td>单店收入更高</td></tr>
+        <tr class="tr-tot"><td>年化ROI</td><td>~290%</td><td>~310%</td><td>海外更优</td><td>核心扩张逻辑成立</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+</div>
+
+<!-- ═══════ TAB 4: UE ═══════ -->
+<div id="tab-ue" class="tab-content">
+  <div class="g2" style="margin-bottom:28px">
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">国内标准门店 P&amp;L</span><span class="sec-note">2024A基准 · 万元人民币</span></div>
+      <div class="card">
+        <div class="card-body" style="padding:0"><table class="ue-table">
+          <tr><td>年收入</td><td class="tdv">955</td><td>100%</td></tr>
+          <tr class="ue-sec"><td colspan="3">商品成本</td></tr>
+          <tr><td style="padding-left:30px">COGS（产品成本 ~33%）</td><td class="tdn">-315</td><td class="tdn">33%</td></tr>
+          <tr class="ue-sec"><td colspan="3">毛利</td></tr>
+          <tr><td style="padding-left:12px;font-weight:600;color:var(--navy)">毛利小计</td><td class="tdv"><strong>640</strong></td><td class="tdv"><strong>67%</strong></td></tr>
+          <tr class="ue-sec"><td colspan="3">门店直接运营成本</td></tr>
+          <tr><td style="padding-left:30px">租金</td><td class="tdn">-90</td><td>9%</td></tr>
+          <tr><td style="padding-left:30px">员工薪酬（5人）</td><td class="tdn">-75</td><td>8%</td></tr>
+          <tr><td style="padding-left:30px">装修摊销（5年期）</td><td class="tdn">-20</td><td>2%</td></tr>
+          <tr><td style="padding-left:30px">水电 / 杂项</td><td class="tdn">-20</td><td>2%</td></tr>
+          <tr><td style="padding-left:30px">分摊总部管理费</td><td class="tdn">-60</td><td>6%</td></tr>
+          <tr class="ue-tot"><td>门店 EBITDA</td><td>~375</td><td>~39%</td></tr>
+        </table></div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="div-row"><span>投资回报指标</span></div>
+        <div class="prog-row"><div class="prog-label">开店总投资</div><div class="prog-track"><div class="prog-fill" style="width:42%;background:var(--navy-lt)"></div></div><div class="prog-val">~130万</div></div>
+        <div class="prog-row"><div class="prog-label">投资回收期</div><div class="prog-track"><div class="prog-fill" style="width:42%;background:var(--green)"></div></div><div class="prog-val" style="color:var(--green)">4–5月</div></div>
+        <div class="prog-row"><div class="prog-label">年化 ROI</div><div class="prog-track"><div class="prog-fill" style="width:100%;background:var(--blue)"></div></div><div class="prog-val" style="color:var(--blue)">~290%</div></div>
+      </div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">海外标准门店 P&amp;L</span><span class="sec-note">2024A基准 · 万元人民币</span></div>
+      <div class="card card-blue">
+        <div class="card-body" style="padding:0"><table class="ue-table">
+          <tr><td>年收入</td><td class="tdv">2,260</td><td>100%</td></tr>
+          <tr class="ue-sec"><td colspan="3">商品成本</td></tr>
+          <tr><td style="padding-left:30px">COGS（海外毛利 ~71%）</td><td class="tdn">-660</td><td class="tdn">29%</td></tr>
+          <tr class="ue-sec"><td colspan="3">毛利</td></tr>
+          <tr><td style="padding-left:12px;font-weight:600;color:var(--navy)">毛利小计</td><td class="tdv"><strong>1,600</strong></td><td class="tdv"><strong>71%</strong></td></tr>
+          <tr class="ue-sec"><td colspan="3">门店直接运营成本</td></tr>
+          <tr><td style="padding-left:30px">租金（地标商圈）</td><td class="tdn">-200</td><td>9%</td></tr>
+          <tr><td style="padding-left:30px">员工薪酬（7人）</td><td class="tdn">-180</td><td>8%</td></tr>
+          <tr><td style="padding-left:30px">装修摊销（5年期）</td><td class="tdn">-50</td><td>2%</td></tr>
+          <tr><td style="padding-left:30px">水电 / 杂项</td><td class="tdn">-40</td><td>2%</td></tr>
+          <tr><td style="padding-left:30px">分摊总部管理费</td><td class="tdn">-155</td><td>7%</td></tr>
+          <tr class="ue-tot"><td>门店 EBITDA</td><td>~935</td><td>~41%</td></tr>
+        </table></div>
+      </div>
+      <div style="margin-top:16px">
+        <div class="div-row"><span>投资回报指标</span></div>
+        <div class="prog-row"><div class="prog-label">开店总投资</div><div class="prog-track"><div class="prog-fill" style="width:42%;background:var(--navy-lt)"></div></div><div class="prog-val">~300万</div></div>
+        <div class="prog-row"><div class="prog-label">投资回收期</div><div class="prog-track"><div class="prog-fill" style="width:40%;background:var(--green)"></div></div><div class="prog-val" style="color:var(--green)">~4月</div></div>
+        <div class="prog-row"><div class="prog-label">年化 ROI</div><div class="prog-track"><div class="prog-fill" style="width:100%;background:var(--blue)"></div></div><div class="prog-val" style="color:var(--blue)">~310%</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="g2">
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">获客成本（CAC）分析</span></div>
+      <div class="tbl" style="margin-bottom:12px"><table class="dt">
+        <thead><tr><th>年份</th><th>新增活跃用户（万）</th><th>CAC归因费用（亿）</th><th>估算CAC（元）</th></tr></thead>
+        <tbody>
+          <tr><td>2022A</td><td>~450</td><td>~5–8</td><td>~110–180</td></tr>
+          <tr><td>2023A</td><td>~585</td><td>~8–12</td><td>~140–205</td></tr>
+          <tr><td>2024A</td><td>~820</td><td>~12–18</td><td>~145–220</td></tr>
+          <tr class="tr-hl"><td>2025A</td><td>~1,855</td><td>~20–30</td><td class="tdp">~110–160</td></tr>
+        </tbody>
+      </table></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>指标</th><th>数值</th><th>类型</th></tr></thead>
+        <tbody>
+          <tr><td>Year 1 ARPU</td><td>~187元</td><td><span class="stag sa">估算</span></td></tr>
+          <tr><td>6年期 LTV</td><td>~800元</td><td><span class="stag sa">估算</span></td></tr>
+          <tr><td>CAC（2025年）</td><td>~110–160元</td><td><span class="stag sa">估算</span></td></tr>
+          <tr class="tr-hl"><td>LTV / CAC</td><td class="tdp">~5–7x</td><td><span class="stag sa">估算</span></td></tr>
+          <tr><td>CAC回收期</td><td class="tdp">&lt;1年</td><td>Year 1 ARPU &gt; CAC</td></tr>
+        </tbody>
+      </table></div>
+      <div class="insight" style="margin-top:12px"><strong>CAC本质是门店固定成本摊销，非广告可变支出。</strong>IP自传播（Lisa晒图→Labubu爆发）是真正的获客引擎，边际广告成本接近零，这是LTV/CAC高达5–7x的根本原因。</div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">用户年限 ARPU 分层（2025A）</span></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>年限</th><th>注册存量（万）</th><th>活跃率</th><th>活跃（万）</th><th>ARPU（元）</th><th>贡献（亿）</th></tr></thead>
+        <tbody>
+          <tr><td>Year 1（2025新客）</td><td>2,650</td><td>65%</td><td>1,723</td><td class="tda">187</td><td>32.2</td></tr>
+          <tr><td>Year 2（2024入）</td><td>1,173</td><td>50%</td><td>587</td><td>262</td><td>15.4</td></tr>
+          <tr><td>Year 3（2023入）</td><td>835</td><td>40%</td><td>334</td><td>337</td><td>11.2</td></tr>
+          <tr><td>Year 4（2022入）</td><td>642</td><td>30%</td><td>193</td><td>411</td><td>7.9</td></tr>
+          <tr class="tr-hl"><td>Year 5（2021入）</td><td>1,218</td><td>25%</td><td>305</td><td class="tdp">468</td><td>14.3</td></tr>
+          <tr><td>Year 6+（2020前）</td><td>740</td><td>20%</td><td>148</td><td class="tdp">524</td><td>7.8</td></tr>
+          <tr class="tr-tot"><td>活跃合计</td><td>7,258</td><td>~43%</td><td>~3,290</td><td>~270</td><td>~88.8</td></tr>
+        </tbody>
+      </table></div>
+      <div class="footnote">活跃ARPU 270元为假设输入；Year 1 ARPU 187元为反推结果。所有数字为估算，活跃率假设±10%对ARPU影响约±15%。</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════ TAB 5: IP ═══════ -->
+<div id="tab-ip" class="tab-content">
+
+  <!-- IP Sub-tabs nav -->
+  <div style="background:var(--white);border:1px solid var(--border);border-bottom:none;margin-bottom:0">
+    <div style="display:flex;overflow-x:auto;border-bottom:2px solid var(--navy)">
+      <button class="ip-sub-btn active" onclick="swIP('overview',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">总览</button>
+      <button class="ip-sub-btn" onclick="swIP('monsters',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">THE MONSTERS</button>
+      <button class="ip-sub-btn" onclick="swIP('skull',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">SKULLPANDA</button>
+      <button class="ip-sub-btn" onclick="swIP('crybaby',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">CRYBABY</button>
+      <button class="ip-sub-btn" onclick="swIP('molly',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">MOLLY</button>
+      <button class="ip-sub-btn" onclick="swIP('dimoo',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">DIMOO</button>
+      <button class="ip-sub-btn" onclick="swIP('twinkle',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">星星人</button>
+      <button class="ip-sub-btn" onclick="swIP('hirono',this)" style="padding:10px 18px;font-size:11px;font-weight:600;color:var(--text3);background:none;border:none;border-bottom:3px solid transparent;cursor:pointer;white-space:nowrap;letter-spacing:.02em;transition:all .15s;margin-bottom:-2px">HIRONO 小野</button>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: OVERVIEW ── -->
+  <div id="ipsub-overview" class="ip-sub" style="background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">Top IP 收入历年趋势</span><span class="sec-note">人民币亿元</span></div>
+      <div class="ch-card"><div class="ch-lg"><canvas id="c6"></canvas></div></div>
+    </div>
+    <div class="section">
+      <div class="sec-hdr"><span class="sec-title">Top IP 综合对比矩阵</span></div>
+      <div class="tbl"><table class="dt">
+        <thead><tr><th>IP</th><th>推出年</th><th>2023A</th><th>2024A</th><th>24 YoY</th><th>2025A</th><th>25 YoY</th><th>均价（元）</th><th>25销量（万件）</th><th>破20亿用时</th></tr></thead>
+        <tbody>
+          <tr class="tr-hl"><td>THE MONSTERS（Labubu）</td><td>2018</td><td>3.7</td><td class="tdv">30.4</td><td class="tdp">+727% ⚡</td><td class="tdv">141.6</td><td class="tdp">+366%</td><td>~200</td><td class="tdp">7,080</td><td>6年（奇点）</td></tr>
+          <tr><td>SKULLPANDA</td><td>2020</td><td>10.3</td><td>13.1</td><td class="tdp">+27%</td><td class="tdp">35.4</td><td class="tdp">+170% ⚡</td><td>~130</td><td>2,720</td><td>5年</td></tr>
+          <tr><td>CRYBABY</td><td>2022</td><td>&lt;0.5</td><td class="tdp">11.7</td><td class="tdp">+1537% ⚡</td><td class="tdp">29.3</td><td class="tdp">+151%</td><td>~120</td><td>2,440</td><td>3年</td></tr>
+          <tr><td>MOLLY</td><td>2016</td><td>10.2</td><td>20.9</td><td class="tdp">+105%</td><td class="tda">29.0 ⚠️</td><td class="tda">+39%</td><td>~130</td><td>2,230</td><td>8年</td></tr>
+          <tr><td>DIMOO</td><td>2019</td><td>7.4</td><td>~9.0</td><td class="tdp">~+20%</td><td class="tdp">27.8</td><td class="tdp">+205% ⚡</td><td>~120</td><td>2,315</td><td>6年</td></tr>
+          <tr class="tr-hl"><td>星星人</td><td>2024</td><td>—</td><td>~1.2</td><td class="tdm">—</td><td class="tdp">20.6</td><td class="tdp">+1600% ⚡</td><td>~120</td><td>1,715</td><td class="tdp">~1年</td></tr>
+          <tr><td>HIRONO 小野</td><td>2021</td><td>~2.5</td><td>~5.0</td><td class="tdp">+107%</td><td>17.4</td><td class="tdp">+248%</td><td>~130</td><td>1,335</td><td>未达</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+    <div class="g2">
+      <div class="section">
+        <div class="sec-hdr"><span class="sec-title">IP集中度变化（%）</span></div>
+        <div class="ch-card"><div class="ch"><canvas id="c7"></canvas></div></div>
+        <div class="tbl" style="margin-top:12px"><table class="dt">
+          <thead><tr><th>指标</th><th>2023A</th><th>2024A</th><th>2025A</th></tr></thead>
+          <tbody>
+            <tr><td>TOP1 IP / 总收入</td><td>SKULL 16%</td><td>THE M 23%</td><td class="tda">THE M 38% ⚠️</td></tr>
+            <tr><td>收入过10亿IP数</td><td>2</td><td>4</td><td class="tdp">7</td></tr>
+            <tr class="tr-hl"><td>收入过20亿IP数</td><td>0</td><td>0</td><td class="tdp">6</td></tr>
+            <tr><td>收入过亿IP数</td><td>10</td><td>13</td><td class="tdp">17</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+      <div class="section">
+        <div class="sec-hdr"><span class="sec-title">品类结构变化（内圈2024/外圈2025）</span></div>
+        <div class="ch-card"><div class="ch"><canvas id="c8"></canvas></div></div>
+        <div class="tbl" style="margin-top:12px"><table class="dt">
+          <thead><tr><th>品类</th><th>2024A（亿）</th><th>占比</th><th>2025A（亿）</th><th>占比</th><th>YoY</th></tr></thead>
+          <tbody>
+            <tr class="tr-hl"><td>毛绒</td><td>28.3</td><td>21.7%</td><td class="tdv">187.1</td><td class="tdv">50.4%</td><td class="tdp">+561%</td></tr>
+            <tr><td>手办</td><td>69.4</td><td>53.2%</td><td>120.2</td><td>32.4%</td><td class="tdp">+73%</td></tr>
+            <tr><td>MEGA</td><td>16.8</td><td>12.9%</td><td>~19.1</td><td>~5%</td><td>+14%</td></tr>
+            <tr><td>衍生品及其他</td><td>15.9</td><td>12.2%</td><td>~44.8</td><td>~12%</td><td class="tdp">+182%</td></tr>
+          </tbody>
+        </table></div>
+      </div>
+    </div>
+    <div class="g2" style="margin-top:8px">
+      <div class="insight"><strong>加速规律：搪胶毛绒是品类奇点。</strong>客单价从~80元拉到~150–200元，使用场景从"收藏摆件"变为"日常配饰"。星星人1年破20亿，是在Labubu验证路径后直接复用成熟渠道的结果——破20亿用时：MOLLY 8年 → CRYBABY 3年 → 星星人 1年，爬坡提速的核心是<strong>平台渠道成熟度</strong>。</div>
+      <div class="warn-box"><strong>MOLLY警示：</strong>2025年实际29亿 vs 预期46亿，低于预期37%。第二大IP、运营最成熟的IP在Labubu爆发背景下仍不达预期，说明IP接力难度被市场系统性低估。下一个"Labubu级"爆款是否存在，是当前估值折价的核心逻辑。</div>
+    </div>
+
+    <!-- IP爬坡分析 -->
+    <div class="section" style="margin-top:28px">
+      <div class="sec-hdr">
+        <span class="sec-title">IP 爬坡速度分析</span>
+        <span class="sec-note">以各IP推出后第1年为起点对齐 · 纵轴为收入亿元</span>
+      </div>
+
+      <!-- 对齐起点折线图 -->
+      <div class="ch-card" style="margin-bottom:20px">
+        <div style="padding:14px 20px 4px;font-size:11px;color:var(--text3)">各IP推出后逐年收入轨迹（Year 0 = 推出年，数值为估算/披露）</div>
+        <div style="position:relative;height:320px"><canvas id="ip_ramp_chart"></canvas></div>
+      </div>
+
+      <!-- 里程碑用时对比表 -->
+      <div class="g2" style="margin-bottom:16px">
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--text4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">破收入关键里程碑用时（年）</div>
+          <div class="tbl"><table class="dt">
+            <thead><tr><th>IP</th><th>推出年</th><th>破5亿</th><th>破10亿</th><th>破20亿</th><th>破50亿</th><th>破100亿</th></tr></thead>
+            <tbody>
+              <tr class="tr-hl"><td>THE MONSTERS</td><td>2018</td><td>第6年</td><td>第6年</td><td>第6年</td><td>第7年</td><td class="tdp">第8年</td></tr>
+              <tr><td>SKULLPANDA</td><td>2020</td><td>第2年</td><td>未达→第6年</td><td class="tdp">第6年</td><td class="tdm">—</td><td class="tdm">—</td></tr>
+              <tr><td>CRYBABY</td><td>2022</td><td>第3年</td><td class="tdp">第3年</td><td class="tdp">第4年</td><td class="tdm">—</td><td class="tdm">—</td></tr>
+              <tr><td>MOLLY</td><td>2016</td><td>第1年</td><td>第8年</td><td class="tda">第9年 ⚠️</td><td class="tdm">—</td><td class="tdm">—</td></tr>
+              <tr><td>DIMOO</td><td>2019</td><td>第1年</td><td>未达→第7年</td><td class="tdp">第7年</td><td class="tdm">—</td><td class="tdm">—</td></tr>
+              <tr class="tr-hl"><td>星星人</td><td>2024</td><td class="tdp">第1年</td><td class="tdp">第1年</td><td class="tdp">第2年</td><td class="tdm">待观察</td><td class="tdm">—</td></tr>
+              <tr><td>HIRONO 小野</td><td>2021</td><td>第4年</td><td class="tdm">未达</td><td class="tdm">未达</td><td class="tdm">—</td><td class="tdm">—</td></tr>
+            </tbody>
+          </table></div>
+        </div>
+        <div>
+          <div style="font-size:10px;font-weight:700;color:var(--text4);text-transform:uppercase;letter-spacing:.1em;margin-bottom:10px">推出后第N年的收入规模（亿元）</div>
+          <div class="tbl"><table class="dt">
+            <thead><tr><th>推出后年份</th><th>MOLLY</th><th>SKULL</th><th>DIMOO</th><th>CRYBABY</th><th>星星人</th><th>THE M</th></tr></thead>
+            <tbody>
+              <tr><td>Year 1</td><td>~4.5</td><td class="tdp">6.0</td><td>~1.5</td><td class="tdm">&lt;0.1</td><td class="tdp">1.2*</td><td class="tdm">&lt;0.5</td></tr>
+              <tr><td>Year 2</td><td>~5.5</td><td>8.5</td><td>~1.8</td><td class="tdm">&lt;0.5</td><td class="tdp">20.6</td><td class="tdm">&lt;1.0</td></tr>
+              <tr><td>Year 3</td><td>~6.0</td><td>10.3</td><td>5.7</td><td class="tdp">11.7</td><td class="tdm">—</td><td>~1.5</td></tr>
+              <tr><td>Year 4</td><td>~6.5</td><td>13.1</td><td>5.8</td><td class="tdp">29.3</td><td class="tdm">—</td><td>~2.0</td></tr>
+              <tr><td>Year 5</td><td>~7.0</td><td class="tdp">35.4</td><td>7.4</td><td class="tdm">—</td><td class="tdm">—</td><td>~2.5</td></tr>
+              <tr><td>Year 6</td><td>7.1</td><td class="tdm">—</td><td>9.0</td><td class="tdm">—</td><td class="tdm">—</td><td>3.1</td></tr>
+              <tr><td>Year 7</td><td>8.0</td><td class="tdm">—</td><td class="tdp">27.8</td><td class="tdm">—</td><td class="tdm">—</td><td>2.6</td></tr>
+              <tr><td>Year 8</td><td>10.2</td><td class="tdm">—</td><td class="tdm">—</td><td class="tdm">—</td><td class="tdm">—</td><td>3.7</td></tr>
+              <tr class="tr-hl"><td>Year 9</td><td class="tda">20.9→29</td><td class="tdm">—</td><td class="tdm">—</td><td class="tdm">—</td><td class="tdm">—</td><td class="tdp">30.4→142</td></tr>
+            </tbody>
+          </table></div>
+          <div class="footnote">*星星人Year 1 = 2024年下半年（仅半年），Year 2 = 2025A全年。MOLLY Year 9为2024A→2025A两年数据。</div>
+        </div>
+      </div>
+
+      <!-- 爬坡规律总结 -->
+      <div class="g2">
+        <div class="insight">
+          <strong>平台加速效应量化：</strong>用"推出后Year 2的收入"作为早期爬坡动能指标——
+          <br>MOLLY（2016）Year 2 = 5.5亿 → 需9年才破20亿
+          <br>SKULL（2020）Year 2 = 8.5亿 → 需6年破20亿
+          <br>CRYBABY（2022）Year 2 = 0.5亿 → 仅需3年破20亿（搪胶毛绒爆发）
+          <br>星星人（2024）Year 2 = <strong>20.6亿</strong> → 直接在Year 2破20亿
+          <br><br>结论：早期收入规模不再预测长期天花板，<strong>平台渠道 + 品类工艺 = 直接决定爬坡斜率</strong>。
+        </div>
+        <div class="warn-box">
+          <strong>THE MONSTERS 奇点模型 vs 平台加速模型的区别：</strong>
+          <br>Labubu是"潜伏6年后的社交货币引爆"——Year 1–7均低于5亿，Year 8突然跳升30亿，Year 9再到142亿。这种S型奇点曲线不可预测、不可复制。
+          <br><br>星星人是"平台加速的线性爆发"——背靠成熟供应链+渠道+TikTok运营，Year 1–2直接达到20亿。天花板是否能到100亿+，取决于能否像Labubu一样产生独立的"社交货币"属性，而非单纯依赖平台分发。
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: THE MONSTERS ── -->
+  <div id="ipsub-monsters" class="ip-sub" style="display:none;background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div style="border-left:4px solid var(--navy);padding-left:16px;margin-bottom:20px">
+      <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy)">THE MONSTERS <span style="font-size:13px;color:var(--text3);font-family:'Source Sans 3',sans-serif;font-weight:400">（含 LABUBU / ZIMOMO / MOKOKO）</span></div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">推出年：2018 · 艺术家：龙家升 · 达成百亿 IP · 全球爆款</div>
+    </div>
+    <div class="g2" style="margin-bottom:20px">
+      <div class="ch-card"><div class="ch"><canvas id="ip_monsters_rev"></canvas></div></div>
+      <div class="ch-card"><div class="ch"><canvas id="ip_monsters_vol"></canvas></div></div>
+    </div>
+    <div class="tbl" style="margin-bottom:16px"><table class="dt">
+      <thead><tr><th>年份</th><th>收入（亿）</th><th>YoY</th><th>估算均价（元）</th><th>估算销量（万件）</th><th>占总营收</th><th>关键事件</th></tr></thead>
+      <tbody>
+        <tr><td>2021A</td><td>3.1</td><td class="tdm">—</td><td>~75</td><td>~415</td><td>6.9%</td><td>毛绒公仔上线</td></tr>
+        <tr><td>2022A</td><td>2.6</td><td class="tdn">-16%</td><td>~75</td><td>~345</td><td>5.6%</td><td>搪胶毛绒正式立项</td></tr>
+        <tr><td>2023A</td><td>3.7</td><td class="tdp">+40%</td><td>~80</td><td>~460</td><td>5.8%</td><td>销量破亿，拐点出现</td></tr>
+        <tr class="tr-hl"><td>2024A ⚡</td><td class="tdv">30.4</td><td class="tdp">+727%</td><td>~150</td><td>~2,030</td><td class="tdp">23.3%</td><td>4月Lisa晒图，泰国爆火</td></tr>
+        <tr class="tr-hl"><td>2025A</td><td class="tdv">141.6</td><td class="tdp">+366%</td><td>~200</td><td class="tdp">~7,080</td><td class="tdp">38.1%</td><td>十周年巡展，梅西花车，索尼电影</td></tr>
+      </tbody>
+    </table></div>
+    <div class="g2">
+      <div class="insight"><strong>奇点触发模式：</strong>2018年签约→2024年爆发，中间潜伏6年。2024年4月Lisa一张Instagram图，叠加毛绒搪胶工艺，制造非线性爆发。3.7亿→30.4亿→141.6亿，两年涨38倍。但这种模式不可预测、不可复制，是估值核心不确定性。</div>
+      <div class="warn-box"><strong>集中度风险：</strong>2025年单IP占总营收38.1%，历史峰值。2026年Labubu 4.0系列（下半年）和索尼电影是关键催化剂，但若没有新"社交货币"事件，自然增速将大幅放缓。</div>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: SKULLPANDA ── -->
+  <div id="ipsub-skull" class="ip-sub" style="display:none;background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div style="border-left:4px solid var(--blue);padding-left:16px;margin-bottom:20px">
+      <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy)">SKULLPANDA</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">推出年：2020 · 艺术家：熊喵 · 艺术设计风 · 最快登顶手办第一 · 温度系列累计79万套</div>
+    </div>
+    <div class="g2" style="margin-bottom:20px">
+      <div class="ch-card"><div class="ch"><canvas id="ip_skull_rev"></canvas></div></div>
+      <div class="ch-card"><div class="ch"><canvas id="ip_skull_vol"></canvas></div></div>
+    </div>
+    <div class="tbl" style="margin-bottom:16px"><table class="dt">
+      <thead><tr><th>年份</th><th>收入（亿）</th><th>YoY</th><th>估算均价（元）</th><th>估算销量（万件）</th><th>占总营收</th><th>关键系列</th></tr></thead>
+      <tbody>
+        <tr><td>2020A</td><td>0.4</td><td class="tdm">—</td><td>~60</td><td>~65</td><td>0.9%</td><td>密林古堡（首系列）</td></tr>
+        <tr><td>2021A</td><td>6.0</td><td class="tdp">+1423%</td><td>~70</td><td>~855</td><td>13.3%</td><td>快速爬升，跻身TOP2</td></tr>
+        <tr><td>2022A</td><td>8.5</td><td class="tdp">+43%</td><td>~75</td><td>~1,130</td><td>18.4%</td><td>夜之城系列爆发，超越MOLLY登顶</td></tr>
+        <tr><td>2023A</td><td>10.3</td><td class="tdp">+21%</td><td>~80</td><td>~1,285</td><td>16.3%</td><td>温度系列持续热销（单系列7.37亿）</td></tr>
+        <tr><td>2024A</td><td>13.1</td><td class="tdp">+27%</td><td>~85</td><td>~1,540</td><td>10.0%</td><td>漫相集系列26.5万套</td></tr>
+        <tr class="tr-hl"><td>2025A ⚡</td><td class="tdp">35.4</td><td class="tdp">+170%</td><td>~130</td><td>~2,720</td><td>9.5%</td><td>冬日乐章、光织园、搪胶毛绒上线</td></tr>
+      </tbody>
+    </table></div>
+    <div class="g2">
+      <div class="insight"><strong>稳步爬坡型：</strong>5年从0到35亿，无外部奇点触发，依靠系列创新持续驱动。温度系列（2022年11月推出）累计销量超79万套，是公司史上最高单系列——说明SKULL的IP粘性以手办为核心，2025年毛绒品类加入后均价+53%是第二曲线。</div>
+      <div class="insight"><strong>品类升级验证：</strong>2025年搪胶毛绒"冬日乐章"首款隐藏款二手价格溢价近12倍，毛绒品类对SKULL的贡献从0跃升至约40%，均价从~85元提升到~130元。</div>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: CRYBABY ── -->
+  <div id="ipsub-crybaby" class="ip-sub" style="display:none;background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div style="border-left:4px solid var(--green);padding-left:16px;margin-bottom:20px">
+      <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy)">CRYBABY</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">推出年：~2022 · 泰国艺术家 · "哭泣治愈"理念 · 最快破10亿纪录 · 3年破20亿</div>
+    </div>
+    <div class="g2" style="margin-bottom:20px">
+      <div class="ch-card"><div class="ch"><canvas id="ip_crybaby_rev"></canvas></div></div>
+      <div class="ch-card"><div class="ch"><canvas id="ip_crybaby_vol"></canvas></div></div>
+    </div>
+    <div class="tbl" style="margin-bottom:16px"><table class="dt">
+      <thead><tr><th>年份</th><th>收入（亿）</th><th>YoY</th><th>估算均价（元）</th><th>估算销量（万件）</th><th>占总营收</th><th>关键事件</th></tr></thead>
+      <tbody>
+        <tr><td>2023A</td><td>&lt;0.5</td><td class="tdm">—</td><td>~75</td><td>&lt;65</td><td>~1%</td><td>小众起步</td></tr>
+        <tr class="tr-hl"><td>2024A ⚡</td><td class="tdp">11.7</td><td class="tdp">+1537%</td><td>~100</td><td>~1,165</td><td class="tdp">8.9%</td><td>泰国主题店开业，搪胶毛绒"眼泪工厂"爆发</td></tr>
+        <tr class="tr-hl"><td>2025A</td><td class="tdp">29.3</td><td class="tdp">+151%</td><td>~120</td><td>~2,440</td><td>7.9%</td><td>怪兽的眼泪系列、飞天小女警联名</td></tr>
+      </tbody>
+    </table></div>
+    <div class="g2">
+      <div class="insight"><strong>最快破10亿纪录：</strong>从不足0.5亿到11.7亿仅用1年，主要靠两个引擎——①泰国文化共鸣（泰国设计师Molly Yllom），Labubu验证的东南亚市场直接赋能；②"眼泪工厂"搪胶毛绒挂件首款隐藏款溢价10倍，形成稀缺效应。治愈情绪契合快节奏消费者心理需求。</div>
+      <div class="insight"><strong>2026观察点：</strong>CRYBABY目前29亿，是否能成为第三个"30亿级"后继续爬坡到50亿+，取决于新系列能否维持搪胶毛绒的热度。飞天小女警联名验证了IP跨界能力。</div>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: MOLLY ── -->
+  <div id="ipsub-molly" class="ip-sub" style="display:none;background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div style="border-left:4px solid var(--amber);padding-left:16px;margin-bottom:20px">
+      <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy)">MOLLY <span style="font-size:13px;color:var(--amber);font-family:'Source Code Pro',monospace">⚠️ 低于预期</span></div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">推出年：2016 · 艺术家：王信明（香港）· 基石IP · 8年破20亿 · 2025A低于市场预期37%</div>
+    </div>
+    <div class="g2" style="margin-bottom:20px">
+      <div class="ch-card"><div class="ch"><canvas id="ip_molly_rev"></canvas></div></div>
+      <div class="ch-card"><div class="ch"><canvas id="ip_molly_vol"></canvas></div></div>
+    </div>
+    <div class="tbl" style="margin-bottom:16px"><table class="dt">
+      <thead><tr><th>年份</th><th>收入（亿）</th><th>YoY</th><th>估算均价（元）</th><th>估算销量（万件）</th><th>占总营收</th><th>关键形态</th></tr></thead>
+      <tbody>
+        <tr><td>2021A</td><td>7.1</td><td class="tdm">—</td><td>~90</td><td>~790</td><td>15.7%</td><td>经典MOLLY + MEGA高端线</td></tr>
+        <tr><td>2022A</td><td>8.0</td><td class="tdp">+13%</td><td>~95</td><td>~840</td><td>17.4%</td><td>放空的一天系列</td></tr>
+        <tr><td>2023A</td><td>10.2</td><td class="tdp">+28%</td><td>~100</td><td>~1,020</td><td>16.3%</td><td>华纳100周年联名</td></tr>
+        <tr><td>2024A</td><td>20.9</td><td class="tdp">+105%</td><td>~120</td><td>~1,740</td><td>16.0%</td><td>BABY MOLLY新形态，MEGA高端化</td></tr>
+        <tr class="tr-hl"><td>2025A ⚠️</td><td class="tda">29.0</td><td class="tda">+39%</td><td>~130</td><td>~2,230</td><td class="tda">7.8%</td><td>实际29亿 vs 市场预期46亿（-37%）</td></tr>
+      </tbody>
+    </table></div>
+    <div class="g2">
+      <div class="warn-box"><strong>关键警示信号：</strong>MOLLY是泡泡玛特运营时间最长（9年）、形态最多元（经典/SPACE/ROYAL/BABY/ANGRY）的IP，在2025年Labubu爆发的高景气背景下仍低于预期37%，说明IP注意力存在明显零和效应——Labubu占据消费者心智和钱包后，其他IP边际受益有限。这是IP梯队接力最大的不确定性来源。</div>
+      <div class="insight"><strong>正面支撑：</strong>MOLLY 2026年迎来诞生20周年，将在全球多地巡展，管理层重点资源投入。ANGRY MOLLY新形态突破原有温柔定位，试图拓展男性用户群。从历史看，每次重大推新（华纳联名、BABY MOLLY）都带来阶段性增长，20周年可能是下一个催化剂。</div>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: DIMOO ── -->
+  <div id="ipsub-dimoo" class="ip-sub" style="display:none;background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div style="border-left:4px solid #0d7490;padding-left:16px;margin-bottom:20px">
+      <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy)">DIMOO</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">推出年：2019 · 艺术家：Ayan · 慢热型 · 6年破20亿 · 2025年迪士尼联名爆发</div>
+    </div>
+    <div class="g2" style="margin-bottom:20px">
+      <div class="ch-card"><div class="ch"><canvas id="ip_dimoo_rev"></canvas></div></div>
+      <div class="ch-card"><div class="ch"><canvas id="ip_dimoo_vol"></canvas></div></div>
+    </div>
+    <div class="tbl" style="margin-bottom:16px"><table class="dt">
+      <thead><tr><th>年份</th><th>收入（亿）</th><th>YoY</th><th>估算均价（元）</th><th>估算销量（万件）</th><th>占总营收</th><th>关键事件</th></tr></thead>
+      <tbody>
+        <tr><td>2021A</td><td>5.7</td><td class="tdm">—</td><td>~80</td><td>~710</td><td>12.6%</td><td>稳居TOP3</td></tr>
+        <tr><td>2022A</td><td>5.8</td><td class="tdp">+2%</td><td>~80</td><td>~720</td><td>12.5%</td><td>增速停滞，被SKULL压制</td></tr>
+        <tr><td>2023A</td><td>7.4</td><td class="tdp">+27%</td><td>~85</td><td>~870</td><td>11.8%</td><td>温和复苏</td></tr>
+        <tr><td>2024A</td><td>~9.0</td><td class="tdp">~+20%</td><td>~90</td><td>~1,000</td><td>~6.9%</td><td>缓步爬升</td></tr>
+        <tr class="tr-hl"><td>2025A ⚡</td><td class="tdp">27.8</td><td class="tdp">+205%</td><td>~120</td><td>~2,315</td><td>7.5%</td><td>迪士尼联名 + "如果今天星期八"系列 + 毛绒品类</td></tr>
+      </tbody>
+    </table></div>
+    <div class="g2">
+      <div class="insight"><strong>慢热型的补涨：</strong>DIMOO从2019年到2024年6年缓慢爬升，2025年突然+205%，背后是三重驱动叠加：①迪士尼联名打开大众圈层；②"如果今天星期八"系列引发情绪共鸣；③毛绒品类复用Labubu验证的搪胶工艺。这一模式说明老IP通过正确的激活策略仍可实现非线性增长。</div>
+      <div class="insight"><strong>2026观察：</strong>DIMOO被授予"中泰建交50周年特邀挚友"荣誉称号，东南亚文化背书加持。关注新系列能否延续2025年增速，或是否只是一次性补涨。</div>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: 星星人 ── -->
+  <div id="ipsub-twinkle" class="ip-sub" style="display:none;background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div style="border-left:4px solid var(--red);padding-left:16px;margin-bottom:20px">
+      <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy)">星星人 <span style="font-size:12px;color:var(--green);font-family:'Source Code Pro',monospace">最快破20亿 ~1年</span></div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">推出年：2024年8月 · 成长最快新锐IP · 1年破20亿 · 亚洲多国售罄</div>
+    </div>
+    <div class="g2" style="margin-bottom:20px">
+      <div class="ch-card"><div class="ch"><canvas id="ip_twinkle_rev"></canvas></div></div>
+      <div class="ch-card"><div class="ch"><canvas id="ip_twinkle_vol"></canvas></div></div>
+    </div>
+    <div class="tbl" style="margin-bottom:16px"><table class="dt">
+      <thead><tr><th>年份</th><th>收入（亿）</th><th>YoY</th><th>估算均价（元）</th><th>估算销量（万件）</th><th>占总营收</th><th>关键事件</th></tr></thead>
+      <tbody>
+        <tr><td>2024A（下半年）</td><td>~1.2</td><td class="tdm">—</td><td>~90</td><td>~130</td><td>~0.9%</td><td>2024年8月签约，9月首款搪胶毛绒发售即售罄</td></tr>
+        <tr><td>2025H1</td><td>3.9</td><td class="tdm">—</td><td>~110</td><td>~355</td><td>2.8%</td><td>乐园星星人见面会，首支单曲上线</td></tr>
+        <tr class="tr-hl"><td>2025A ⚡</td><td class="tdp">20.6</td><td class="tdp">+1600%</td><td>~120</td><td>~1,715</td><td class="tdp">5.6%</td><td>好梦气象局系列，北美市场爆发，管理层重点资源</td></tr>
+      </tbody>
+    </table></div>
+    <div class="g2">
+      <div class="insight"><strong>平台加速效应的极致：</strong>星星人1年破20亿，是Labubu路径验证后的完整复制——签约即获全球630家门店资源、毛绒供应链、TikTok运营矩阵。2024年8月签约，9月首款毛绒挂件发售即秒空，二手溢价6.8倍，印证平台渠道成熟度已远超早期IP起步阶段。</div>
+      <div class="warn-box"><strong>可持续性存疑：</strong>1年20亿的爬坡速度过快，2025年大量消费可能来自"新奇购买"而非稳定粉丝基础。2026年能否从20亿进一步增长到50亿+，是关键验证点。管理层寄予厚望（王宁业绩会明确提及），已投入乐园、展览等重资源。</div>
+    </div>
+  </div>
+
+  <!-- ── SUB-TAB: HIRONO ── -->
+  <div id="ipsub-hirono" class="ip-sub" style="display:none;background:var(--white);border:1px solid var(--border);border-top:none;padding:24px">
+    <div style="border-left:4px solid #637589;padding-left:16px;margin-bottom:20px">
+      <div style="font-family:'Source Serif 4',serif;font-size:18px;font-weight:600;color:var(--navy)">HIRONO 小野</div>
+      <div style="font-size:11px;color:var(--text3);margin-top:4px">推出年：2021 · 艺术家：Lang · 情绪IP定位 · 2025年首开品牌独立门店 · 未达20亿</div>
+    </div>
+    <div class="g2" style="margin-bottom:20px">
+      <div class="ch-card"><div class="ch"><canvas id="ip_hirono_rev"></canvas></div></div>
+      <div class="ch-card"><div class="ch"><canvas id="ip_hirono_vol"></canvas></div></div>
+    </div>
+    <div class="tbl" style="margin-bottom:16px"><table class="dt">
+      <thead><tr><th>年份</th><th>收入（亿）</th><th>YoY</th><th>估算均价（元）</th><th>估算销量（万件）</th><th>占总营收</th><th>关键事件</th></tr></thead>
+      <tbody>
+        <tr><td>2022A</td><td>~1.4</td><td class="tdm">—</td><td>~80</td><td>~175</td><td>3.0%</td><td>首个情绪系列</td></tr>
+        <tr><td>2023A</td><td>~2.5</td><td class="tdp">+79%</td><td>~85</td><td>~295</td><td>3.9%</td><td>快闪店全球扩张</td></tr>
+        <tr><td>2024A</td><td>~5.0</td><td class="tdp">+107%</td><td>~95</td><td>~525</td><td>~3.8%</td><td>搪胶毛绒"公路日志"首发售罄，溢价6倍</td></tr>
+        <tr class="tr-hl"><td>2025A</td><td>17.4</td><td class="tdp">+248%</td><td>~130</td><td>~1,335</td><td>4.7%</td><td>上海+曼谷品牌独立门店，小王子联名，服饰/家居多品类</td></tr>
+      </tbody>
+    </table></div>
+    <div class="g2">
+      <div class="insight"><strong>品牌化转型：</strong>HIRONO是唯一正在向"生活方式品牌"转型的IP——上海和曼谷品牌店涵盖潮玩、服饰、家居、雕塑，类比Supreme/Off-White的IP溢价路径。2025年17亿收入中品牌店贡献显著，均价提升到~130元（vs早期~80元）反映定价权提升。</div>
+      <div class="insight"><strong>未达20亿原因：</strong>情绪IP（疲惫/孤独感）的目标受众比治愈IP（CRYBABY）或社交货币IP（Labubu）更窄，海外市场验证较慢。但独立品牌店战略若成功，可能开辟比单纯潮玩更高的天花板。</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<div class="page-footer">
+  免责声明：本报告基于泡泡玛特2025年全年业绩公告（2026年3月25日）及历年年报整理，仅供参考，不构成投资建议。
+  数据标注：绿色"披露"=年报直接披露 · 蓝色"直接计算"=由披露数据四则运算 · 黄色"估算"=含假设 · 灰色=未披露。
+  过往业绩不代表未来回报，投资涉及风险，请审慎决策。数据截至2026年4月13日。
+</div>
+
+<script>
+function sw(id,btn){
+  document.querySelectorAll('.tab-content').forEach(e=>e.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(e=>e.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+
+Chart.defaults.color='#8fa3b8';
+Chart.defaults.borderColor='#e8edf3';
+Chart.defaults.font.family="'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace";
+Chart.defaults.font.size=10;
+
+const N='#003057',B='#0074bf',G='#00783e',R='#c0392b',A='#b45309',
+      T='#0d7490',P='#7c3aed',S='#e8f3fc',M='#8fa3b8';
+
+const TT={backgroundColor:'#fff',borderColor:'#d6dde6',borderWidth:1,
+  titleColor:'#1a2332',bodyColor:'#3d5168',padding:12,cornerRadius:2};
+
+// c1 - Overview Revenue
+new Chart(document.getElementById('c1'),{type:'bar',data:{
+  labels:['2021A','2022A','2023A','2024A','2025A'],
+  datasets:[
+    {label:'总营收（亿）',data:[44.9,46.2,63.0,130.4,371.2],
+     backgroundColor:['#cde4f5','#cde4f5','#cde4f5','#4a9ddb',N],borderRadius:0,yAxisID:'y',order:2},
+    {label:'归母净利润（亿）',data:[10.0,4.8,10.8,31.3,127.8],
+     type:'line',borderColor:G,borderWidth:2,pointRadius:5,pointBackgroundColor:G,pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,fill:false,yAxisID:'y',order:1},
+    {label:'净利率（%,右轴）',data:[22.3,10.4,18.9,26.1,34.4],
+     type:'line',borderColor:A,borderDash:[5,3],borderWidth:1.5,pointRadius:4,pointBackgroundColor:A,pointBorderColor:'#fff',pointBorderWidth:1.5,tension:.2,fill:false,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16,color:'#3d5168',font:{size:11}}},tooltip:TT},
+    scales:{x:{grid:{color:'#f0f4f8'},ticks:{color:M}},
+      y:{position:'left',grid:{color:'#f0f4f8'},ticks:{callback:v=>v+'亿',color:M}},
+      y2:{position:'right',grid:{drawOnChartArea:false},ticks:{callback:v=>v+'%',color:A}}}}
+});
+
+// c2 - Domestic/Overseas stacked
+new Chart(document.getElementById('c2'),{type:'bar',data:{
+  labels:['2021A','2022A','2023A','2024A','2025A'],
+  datasets:[
+    {label:'国内收入（亿）',data:[43.5,41.7,52.4,79.7,208.5],backgroundColor:'#4a9ddb',borderRadius:0,order:2},
+    {label:'海外收入（亿）',data:[1.4,5.3,10.7,50.7,162.7],backgroundColor:N,borderRadius:0,order:2},
+    {label:'海外占比（%,右轴）',data:[3.1,11.5,16.9,38.9,43.8],
+     type:'line',borderColor:G,borderWidth:2,pointRadius:4,pointBackgroundColor:G,pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,fill:false,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:12,padding:14,color:'#3d5168',font:{size:11}}},tooltip:TT},
+    scales:{x:{grid:{color:'#f0f4f8'},ticks:{color:M}},
+      y:{grid:{color:'#f0f4f8'},ticks:{callback:v=>v+'亿',color:M}},
+      y2:{position:'right',grid:{drawOnChartArea:false},ticks:{callback:v=>v+'%',color:G},min:0,max:60}}}
+});
+
+// c3 - Channel doughnut
+new Chart(document.getElementById('c3'),{type:'doughnut',data:{
+  labels:['零售门店','机器人商店','抽盒机','天猫','抖音','批发其他'],
+  datasets:[{data:[48,9,14,8,8,13],backgroundColor:[N,B,G,A,T,M],borderColor:'#fff',borderWidth:3,hoverOffset:4}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'right',labels:{boxWidth:10,padding:10,color:'#3d5168',font:{size:11}}},
+      tooltip:{...TT,callbacks:{label:ctx=>` ${ctx.label}: ${ctx.raw}%`}}}}
+});
+
+// c4 - Overseas bar+line
+new Chart(document.getElementById('c4'),{type:'bar',data:{
+  labels:['2021A','2022A','2023A','2024A','2025A'],
+  datasets:[
+    {label:'海外收入（亿）',data:[1.4,5.3,10.7,50.7,162.7],
+     backgroundColor:[S,'#b3d7f0','#7bbfe8','#4a9ddb',N],borderRadius:0,order:2},
+    {label:'海外单店年收入（万,右轴）',data:[46,120,730,2260,5000],
+     type:'line',borderColor:G,borderWidth:2,pointRadius:5,pointBackgroundColor:G,pointBorderColor:'#fff',pointBorderWidth:2,tension:.2,fill:false,yAxisID:'y2',order:1}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:12,padding:14,color:'#3d5168',font:{size:11}}},tooltip:TT},
+    scales:{x:{grid:{color:'#f0f4f8'},ticks:{color:M}},
+      y:{grid:{color:'#f0f4f8'},ticks:{callback:v=>v+'亿',color:M}},
+      y2:{position:'right',grid:{drawOnChartArea:false},ticks:{callback:v=>v+'万',color:G}}}}
+});
+
+// c5 - Region doughnut
+new Chart(document.getElementById('c5'),{type:'doughnut',data:{
+  labels:['亚太 80.1亿','美洲 68.1亿','欧洲 14.5亿'],
+  datasets:[{data:[80.1,68.1,14.5],backgroundColor:[B,N,G],borderColor:'#fff',borderWidth:3,hoverOffset:4}]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'right',labels:{boxWidth:10,padding:10,color:'#3d5168',font:{size:11}}},
+      tooltip:{...TT,callbacks:{label:ctx=>` ${ctx.label}: ${(ctx.raw/162.7*100).toFixed(1)}%`}}}}
+});
+
+// c6 - IP Trend
+new Chart(document.getElementById('c6'),{type:'line',data:{
+  labels:['2021A','2022A','2023A','2024A','2025A'],
+  datasets:[
+    {label:'THE MONSTERS',data:[3.1,2.6,3.7,30.4,141.6],borderColor:N,borderWidth:3,pointRadius:5,pointBackgroundColor:N,pointBorderColor:'#fff',pointBorderWidth:2,tension:.15,fill:false},
+    {label:'SKULLPANDA',data:[6.0,8.5,10.3,13.1,35.4],borderColor:B,borderWidth:2,pointRadius:4,pointBackgroundColor:B,pointBorderColor:'#fff',pointBorderWidth:1.5,tension:.15,fill:false},
+    {label:'MOLLY',data:[7.1,8.0,10.2,20.9,29.0],borderColor:A,borderWidth:2,pointRadius:4,pointBackgroundColor:A,pointBorderColor:'#fff',pointBorderWidth:1.5,tension:.15,fill:false},
+    {label:'CRYBABY',data:[null,null,0.5,11.7,29.3],borderColor:G,borderWidth:2,pointRadius:4,pointBackgroundColor:G,pointBorderColor:'#fff',pointBorderWidth:1.5,tension:.15,fill:false,spanGaps:false},
+    {label:'DIMOO',data:[5.7,5.8,7.4,9.0,27.8],borderColor:T,borderWidth:1.5,borderDash:[4,3],pointRadius:3,pointBackgroundColor:T,pointBorderColor:'#fff',pointBorderWidth:1.5,tension:.15,fill:false},
+    {label:'星星人',data:[null,null,null,1.2,20.6],borderColor:R,borderWidth:2,pointRadius:5,pointBackgroundColor:R,pointBorderColor:'#fff',pointBorderWidth:1.5,tension:.15,fill:false,spanGaps:false}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{boxWidth:12,padding:16,color:'#3d5168',font:{size:11}}},
+      tooltip:{...TT,callbacks:{label:ctx=>ctx.parsed.y!==null?` ${ctx.dataset.label}: ${ctx.parsed.y}亿`:''}}},
+    scales:{x:{grid:{color:'#f0f4f8'},ticks:{color:M}},
+      y:{grid:{color:'#f0f4f8'},ticks:{callback:v=>v+'亿',color:M},min:0}}}
+});
+
+// c7 - IP Concentration stacked bar
+new Chart(document.getElementById('c7'),{type:'bar',data:{
+  labels:['2023A','2024A','2025A'],
+  datasets:[
+    {label:'THE MONSTERS',data:[5.8,23.3,38.1],backgroundColor:N,borderRadius:0},
+    {label:'MOLLY',data:[16.3,16.0,7.8],backgroundColor:A,borderRadius:0},
+    {label:'SKULLPANDA',data:[16.3,10.0,9.5],backgroundColor:B,borderRadius:0},
+    {label:'CRYBABY',data:[1.1,8.9,7.9],backgroundColor:G,borderRadius:0},
+    {label:'其他',data:[60.5,41.8,36.7],backgroundColor:'#cde4f5',borderRadius:0}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'top',labels:{boxWidth:10,padding:10,color:'#3d5168',font:{size:10}}},
+      tooltip:{...TT,callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.raw}%`}}},
+    scales:{x:{stacked:true,grid:{color:'#f0f4f8'},ticks:{color:M}},
+      y:{stacked:true,grid:{color:'#f0f4f8'},ticks:{callback:v=>v+'%',color:M},max:100}}}
+});
+
+// c8 - Category nested doughnut
+new Chart(document.getElementById('c8'),{type:'doughnut',data:{
+  labels:['毛绒','手办','衍生品','MEGA'],
+  datasets:[
+    {label:'2024A',data:[21.7,53.2,12.2,12.9],
+     backgroundColor:['rgba(0,48,87,0.25)','rgba(0,116,191,0.25)','rgba(0,120,62,0.25)','rgba(180,83,9,0.25)'],
+     borderColor:'#fff',borderWidth:2},
+    {label:'2025A',data:[50.4,32.4,12.1,5.1],
+     backgroundColor:[N,B,G,A],borderColor:'#fff',borderWidth:3,hoverOffset:4}
+  ]},
+  options:{responsive:true,maintainAspectRatio:false,
+    plugins:{legend:{position:'right',labels:{boxWidth:10,padding:10,color:'#3d5168',font:{size:11}}},
+      tooltip:{...TT,callbacks:{label:ctx=>` ${ctx.dataset.label}: ${ctx.raw}%`}},
+      title:{display:true,text:'内圈=2024A · 外圈=2025A',color:M,font:{size:10},padding:{bottom:8}}}}
+});
+
+// ── IP Sub-tab switch ──
+function swIP(id, btn) {
+  document.querySelectorAll('.ip-sub').forEach(e => e.style.display = 'none');
+  document.querySelectorAll('.ip-sub-btn').forEach(e => {
+    e.style.color = 'var(--text3)';
+    e.style.borderBottomColor = 'transparent';
+  });
+  document.getElementById('ipsub-' + id).style.display = 'block';
+  btn.style.color = 'var(--navy)';
+  btn.style.borderBottomColor = 'var(--blue)';
+}
+
+// ── IP Ramp Alignment Chart (Year 0 = launch year) ──
+new Chart(document.getElementById('ip_ramp_chart'), {
+  type: 'line',
+  data: {
+    labels: ['Year 1','Year 2','Year 3','Year 4','Year 5','Year 6','Year 7','Year 8','Year 9'],
+    datasets: [
+      {
+        label: 'THE MONSTERS',
+        data: [0.4, 0.8, 1.5, 2.0, 2.5, 3.1, 2.6, 3.7, 141.6],
+        borderColor: N, borderWidth: 3,
+        pointRadius: [3,3,3,3,3,3,3,3,7],
+        pointBackgroundColor: N, pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.15, fill: false, spanGaps: true
+      },
+      {
+        label: 'SKULLPANDA',
+        data: [0.4, 6.0, 8.5, 10.3, 13.1, 35.4, null, null, null],
+        borderColor: B, borderWidth: 2,
+        pointRadius: 4, pointBackgroundColor: B, pointBorderColor: '#fff', pointBorderWidth: 1.5,
+        tension: 0.15, fill: false, spanGaps: false
+      },
+      {
+        label: 'MOLLY',
+        data: [4.5, 5.5, 6.0, 6.5, 7.0, 7.1, 8.0, 10.2, 29.0],
+        borderColor: A, borderWidth: 2, borderDash: [4,3],
+        pointRadius: 4, pointBackgroundColor: A, pointBorderColor: '#fff', pointBorderWidth: 1.5,
+        tension: 0.15, fill: false
+      },
+      {
+        label: 'CRYBABY',
+        data: [0.05, 0.4, 11.7, 29.3, null, null, null, null, null],
+        borderColor: G, borderWidth: 2,
+        pointRadius: 4, pointBackgroundColor: G, pointBorderColor: '#fff', pointBorderWidth: 1.5,
+        tension: 0.15, fill: false, spanGaps: false
+      },
+      {
+        label: 'DIMOO',
+        data: [1.5, 1.8, 5.7, 5.8, 7.4, 9.0, 27.8, null, null],
+        borderColor: T, borderWidth: 2, borderDash: [3,3],
+        pointRadius: 3, pointBackgroundColor: T, pointBorderColor: '#fff', pointBorderWidth: 1.5,
+        tension: 0.15, fill: false, spanGaps: false
+      },
+      {
+        label: '星星人',
+        data: [1.2, 20.6, null, null, null, null, null, null, null],
+        borderColor: R, borderWidth: 2.5,
+        pointRadius: [5,7], pointBackgroundColor: R, pointBorderColor: '#fff', pointBorderWidth: 2,
+        tension: 0.15, fill: false, spanGaps: false
+      }
+    ]
+  },
+  options: {
+    responsive: true, maintainAspectRatio: false,
+    interaction: { mode: 'index', intersect: false },
+    plugins: {
+      legend: { position: 'top', labels: { boxWidth: 12, padding: 16, color: '#3d5168', font: { size: 11 } } },
+      tooltip: {
+        ...TT,
+        callbacks: {
+          label: ctx => ctx.parsed.y !== null ? ` ${ctx.dataset.label}: ${ctx.parsed.y}亿` : ''
+        }
+      },
+      annotation: {}
+    },
+    scales: {
+      x: { grid: { color: '#f0f4f8' }, ticks: { color: M } },
+      y: {
+        grid: { color: '#f0f4f8' },
+        ticks: { callback: v => v + '亿', color: M },
+        min: 0,
+        title: { display: true, text: '收入（亿元）', color: M, font: { size: 10 } }
+      }
+    }
+  }
+});
+
+// ── Helper: dual-axis bar+line chart for IP ──
+function ipChart(canvasId, labels, revData, volData, revColor) {
+  new Chart(document.getElementById(canvasId), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: '收入（亿元）',
+          data: revData,
+          backgroundColor: revData.map((v,i) => i === revData.length-1 ? revColor : revColor+'55'),
+          borderRadius: 0,
+          yAxisID: 'y',
+          order: 2
+        },
+        {
+          label: '销量（万件，右轴）',
+          data: volData,
+          type: 'line',
+          borderColor: G,
+          borderWidth: 2,
+          pointRadius: 4,
+          pointBackgroundColor: G,
+          pointBorderColor: '#fff',
+          pointBorderWidth: 2,
+          tension: 0.2,
+          fill: false,
+          yAxisID: 'y2',
+          order: 1,
+          spanGaps: true
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', labels: { boxWidth: 12, padding: 14, color: '#3d5168', font: { size: 11 } } },
+        tooltip: TT
+      },
+      scales: {
+        x: { grid: { color: '#f0f4f8' }, ticks: { color: M } },
+        y: { position: 'left', grid: { color: '#f0f4f8' }, ticks: { callback: v => v+'亿', color: M } },
+        y2: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v+'万', color: G } }
+      }
+    }
+  });
+}
+
+// ── Helper: YoY line chart ──
+function yoyChart(canvasId, labels, yoyData, lineColor) {
+  new Chart(document.getElementById(canvasId), {
+    type: 'bar',
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: '均价（元）',
+          data: yoyData.price,
+          backgroundColor: yoyData.price.map((v,i) => i === yoyData.price.length-1 ? lineColor : lineColor+'55'),
+          borderRadius: 0,
+          yAxisID: 'y',
+          order: 2
+        },
+        {
+          label: 'YoY增速（%，右轴）',
+          data: yoyData.yoy,
+          type: 'line',
+          borderColor: A,
+          borderDash: [4,3],
+          borderWidth: 1.5,
+          pointRadius: 4,
+          pointBackgroundColor: A,
+          pointBorderColor: '#fff',
+          pointBorderWidth: 1.5,
+          tension: 0.2,
+          fill: false,
+          yAxisID: 'y2',
+          order: 1,
+          spanGaps: true
+        }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      interaction: { mode: 'index', intersect: false },
+      plugins: {
+        legend: { position: 'top', labels: { boxWidth: 12, padding: 14, color: '#3d5168', font: { size: 11 } } },
+        tooltip: TT
+      },
+      scales: {
+        x: { grid: { color: '#f0f4f8' }, ticks: { color: M } },
+        y: { position: 'left', grid: { color: '#f0f4f8' }, ticks: { callback: v => v+'元', color: M } },
+        y2: { position: 'right', grid: { drawOnChartArea: false }, ticks: { callback: v => v+'%', color: A } }
+      }
+    }
+  });
+}
+
+// ── THE MONSTERS ──
+ipChart('ip_monsters_rev',
+  ['2021A','2022A','2023A','2024A','2025A'],
+  [3.1, 2.6, 3.7, 30.4, 141.6],
+  [415, 345, 460, 2030, 7080],
+  N
+);
+yoyChart('ip_monsters_vol',
+  ['2021A','2022A','2023A','2024A','2025A'],
+  { price: [75, 75, 80, 150, 200], yoy: [null, -16, 40, 727, 366] },
+  N
+);
+
+// ── SKULLPANDA ──
+ipChart('ip_skull_rev',
+  ['2020A','2021A','2022A','2023A','2024A','2025A'],
+  [0.4, 6.0, 8.5, 10.3, 13.1, 35.4],
+  [65, 855, 1130, 1285, 1540, 2720],
+  B
+);
+yoyChart('ip_skull_vol',
+  ['2020A','2021A','2022A','2023A','2024A','2025A'],
+  { price: [60, 70, 75, 80, 85, 130], yoy: [null, 1423, 43, 21, 27, 170] },
+  B
+);
+
+// ── CRYBABY ──
+ipChart('ip_crybaby_rev',
+  ['2023A','2024A','2025A'],
+  [0.4, 11.7, 29.3],
+  [55, 1165, 2440],
+  G
+);
+yoyChart('ip_crybaby_vol',
+  ['2023A','2024A','2025A'],
+  { price: [75, 100, 120], yoy: [null, 1537, 151] },
+  G
+);
+
+// ── MOLLY ──
+ipChart('ip_molly_rev',
+  ['2021A','2022A','2023A','2024A','2025A'],
+  [7.1, 8.0, 10.2, 20.9, 29.0],
+  [790, 840, 1020, 1740, 2230],
+  A
+);
+yoyChart('ip_molly_vol',
+  ['2021A','2022A','2023A','2024A','2025A'],
+  { price: [90, 95, 100, 120, 130], yoy: [null, 13, 28, 105, 39] },
+  A
+);
+
+// ── DIMOO ──
+ipChart('ip_dimoo_rev',
+  ['2021A','2022A','2023A','2024A','2025A'],
+  [5.7, 5.8, 7.4, 9.0, 27.8],
+  [710, 720, 870, 1000, 2315],
+  T
+);
+yoyChart('ip_dimoo_vol',
+  ['2021A','2022A','2023A','2024A','2025A'],
+  { price: [80, 80, 85, 90, 120], yoy: [null, 2, 27, 20, 205] },
+  T
+);
+
+// ── 星星人 ──
+ipChart('ip_twinkle_rev',
+  ['2024H2','2025H1','2025A'],
+  [1.2, 3.9, 20.6],
+  [130, 355, 1715],
+  R
+);
+yoyChart('ip_twinkle_vol',
+  ['2024H2','2025H1','2025A'],
+  { price: [90, 110, 120], yoy: [null, null, 1600] },
+  R
+);
+
+// ── HIRONO ──
+ipChart('ip_hirono_rev',
+  ['2022A','2023A','2024A','2025A'],
+  [1.4, 2.5, 5.0, 17.4],
+  [175, 295, 525, 1335],
+  M
+);
+yoyChart('ip_hirono_vol',
+  ['2022A','2023A','2024A','2025A'],
+  { price: [80, 85, 95, 130], yoy: [null, 79, 107, 248] },
+  M
+);
+</script>
+</body>
+</html>
